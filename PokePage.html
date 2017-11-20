@@ -8,6 +8,28 @@
     <h1>Welcome to the PokePage!</h1>
     <h3>A project by Klaus Koster and Anthony Tyler Bernero</h3>
     <p>This website allows you to interact with a simplified Pokedex database.</p>
+    <form><!-- TODO ACTION -->
+        <fieldset>
+            <legend>Table Selection</legend>
+            <input type="radio" name="table_selection" value="Pokemon"> Pokemon <br>
+            <input type="radio" name="table_selection" value="Trainers"> Trainers <br>
+            <input type="radio" name="table_selection" value="Gyms"> Gyms <br>
+            <input type="radio" name="table_selection" value="Badges"> Badges <br>
+            <input type="radio" name="table_selection" value="Trainer_Badges"> Trainer_Badge <br>
+        </fieldset>
+        <fieldset>
+            <legend>Field Selection</legend>
+            <input type="radio" name="field_selection" value="ID"> ID <br>
+            <input type="radio" name="field_selection" value="Name"> Name <br>
+            <input type="radio" name="field_selection" value="Type"> Type <br>
+            <input type="radio" name="field_selection" value="Attack"> Attack <br>
+            <input type="radio" name="field_selection" value="trainerID"> trainerID <br>
+            <input type="radio" name="field_selection" value="Catchphrase"> Catchphrase <br>
+            <input type="radio" name="field_selection" value="badgeID"> badgeID <br>
+            <input type="radio" name="field_selection" value="Color"> Color <br>
+        </fieldset>
+    </form>
+    <!-- TODO ADD STYLING -->
   <table>
     <caption>Pokemon</caption>
     <tr>
