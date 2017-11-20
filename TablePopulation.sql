@@ -41,6 +41,6 @@ VALUES(("Pewter City", #, 1), ("Cerulean", #, 2), ("Vermilion", #, 3),
 -- Trainers_Badges table intial inserts
 INSERT INTO Trainers_Badges (trainerID, badgeID)
 VALUES((1,1), (1,3), (1,4), (1,7),
-		(2,1), (2,2), (2,5), (2,6), (2,8));
+(2,1), (2,2), (2,5), (2,6), (2,8));
 		
 -- test edit to see if name was updated on my git bash
