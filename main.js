@@ -12,34 +12,38 @@ var bodyParser = require('body-parser');
 
 // express app
 var app = express();
+var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
-// Do we want handlebars?  if so, add it here.
-// also add the engine here
-
+app.engine('handlebars', handlebars.engine);
 // setup new body object to be created of any type (e:t)
 app.use(bodyParser.urlencoded({extended:true}));
 
-//we would add the add the static page stuff and set view engine here
+// display static pages
+app.use('/static', express.static('public'));
+app.set('view engine', 'handlebars');
 
-// set the port to whatever [valid] number you want
+// set the port to whatever [valid] number you want and set db stuff
 app.set('port', 33445);
+app.set('mysql', mysql);
 
 
-app.use('/', require('./file'));
+app.use('/home', require('./home.js'));
+app.use('/pokemon', require('./pokemon.js'));
+app.use('/trainers', require('./trainers.js'));
+app.use('/badges', require('./badges.js'));
+app.use('/gyms', require('./gyms.js'));
+app.use('/trainers_badges', require('./trainers_badges.js'));
 
-/*  If we don't use handlebars, this doesn't do anything:
+
 app.use(function(req, res){
 	res.status(404);
 	res.render('404');
 });
 
-
 app.use(function(req, res){
 	res.status(500);
 	res.render('500');
 });
-
-*/
 
 app.listen(app.get('port'), function(){
 	console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
