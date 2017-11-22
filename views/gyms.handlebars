@@ -1,9 +1,6 @@
 <!-- gyms handlebars --> 
 
 <h1>Gyms in the Pokedex:</h1>
-{{#each obj}}
-{{this}}
-{{/each}}
 
 <table>
 	<thead>
@@ -12,7 +9,7 @@
 		<th>Gym Badge</th>
 	</thead>
 	<tbody>
-		{{#each pokemon}}
+		{{#each gyms}}
 		<tr>
 			<td>{{name}}</td>
 			<td>{{GymLeader}}</td>
