@@ -16,3 +16,8 @@ module.exports = function(){
 
     return router;
 }();
+
+
+// git push new branch stuff
+
+// https://forum.freecodecamp.org/t/push-a-new-local-branch-to-a-remote-git-repository-and-track-it-too/13222
