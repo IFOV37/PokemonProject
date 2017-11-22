@@ -19,7 +19,7 @@ var app = express();
 // setup new body object to be created of any type (e:t)
 app.use(bodyParser.urlencoded({extended:true}));
 
-//we wouladd the add the static page stuff and set view engine here
+//we would add the add the static page stuff and set view engine here
 
 // set the port to whatever [valid] number you want
 app.set('port', 33445);
