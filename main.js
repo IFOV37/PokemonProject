@@ -13,12 +13,12 @@ var bodyParser = require('body-parser');
 // express app
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
-
 app.engine('handlebars', handlebars.engine);
+
 // setup new body object to be created of any type (e:t)
 app.use(bodyParser.urlencoded({extended:true}));
 
-// display static pages
+// script for static pages
 app.use('/static', express.static('public'));
 app.set('view engine', 'handlebars');
 
