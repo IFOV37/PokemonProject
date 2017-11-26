@@ -6,7 +6,7 @@ module.exports = function(){
 
     // get all pokemon in pokemon table
     function getPokemon(res, mysql, context, complete){
-    	mysql.pool.query("SELECT id, name, type, attack, trainer.id AS Trainer FROM Pokemon INNER JOIN trainer ON trainer.id = pokemon.trainerID", function(error, results, fields){
+    	mysql.pool.query("SELECT Pokemon.id, Pokemon.name, type, attack, Trainers.name AS Trainer FROM Pokemon LEFT JOIN Trainers ON Trainers.id = Pokemon.trainerID", function(error, results, fields){
     		if(error){
     			res.write(JSON.stringify(error));
     			res.end();
@@ -37,11 +37,11 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
 
         getPokemon(res, mysql, context, complete);
-        getTrainers(res, mysql, context, complete);
+       // getTrainers(res, mysql, context, complete);
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 2){
+            if(callbackCount >= 1){
                 res.render('pokemon', context);
             }
         }

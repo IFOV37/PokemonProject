@@ -42,7 +42,7 @@ module.exports = function(){
 
     // get all gyms in Gyms table
     function getGyms(res, mysql, context, complete){
-    	mysql.pool.query("SELECT id, name, t.name AS GymLeader, b.name AS GymBadge FROM Gyms INNER JOIN Trainers t ON t.id = Gyms.trainerID INNER JOIN Badges b.id = Gyms.badgeID", function(error, results, fields){
+    	mysql.pool.query("SELECT Gyms.id, Gyms.name, t.name AS GymLeader, b.name AS GymBadge FROM Gyms INNER JOIN Trainers t ON t.id = Gyms.trainerID INNER JOIN Badges b ON b.id = Gyms.badgeID", function(error, results, fields){
     		if(error){
     			res.write(JSON.stringify(error));
     			res.end();
@@ -68,7 +68,7 @@ module.exports = function(){
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 4){
+            if(callbackCount >= 1){
                 res.render('gyms', context);
             }
         }
