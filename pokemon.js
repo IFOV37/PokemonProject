@@ -12,7 +12,7 @@ module.exports = function(){
     			res.end();
     		}
             context.pokemon = results;
-            copmlete();
+            complete();
     	});
     }
 
@@ -24,7 +24,7 @@ module.exports = function(){
                 res.end();
             }
             context.trainers = results;
-            copmlete();
+            complete();
         });
     }
 
