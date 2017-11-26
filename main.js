@@ -32,7 +32,7 @@ app.use('/pokemon', require('./pokemon.js'));
 app.use('/trainers', require('./trainers.js'));
 app.use('/badges', require('./badges.js'));
 app.use('/gyms', require('./gyms.js'));
-app.use('/trainers_badges', require('./trainers_badges.js'));
+app.use('/trainers-badges', require('./trainers-badges.js'));
 
 
 app.use(function(req, res){

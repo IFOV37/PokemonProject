@@ -1,0 +1,22 @@
+<!-- trainers handlebars -->
+
+<h1>Trainers in the Database:</h1>
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Catchphrase</th>
+	</thead>
+	<tbody>
+		{{#each pokemon}}
+		<tr>
+			<td>{{Name}}</td>
+			<td>{{catchphrase}}</td>
+			<!-- add button for delete here -->
+			<!-- add link to update here -->
+		</tr>
+		{{/each}}
+	</tbody>
+
+	<!-- add form to add a pokemon, if we whish to do so here. -->
+
+</table>
