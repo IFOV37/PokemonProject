@@ -12,7 +12,7 @@ module.exports = function(){
     			res.end();
     		}
             context.trainers = results;
-            copmlete();
+            complete();
     	});
     }
 
