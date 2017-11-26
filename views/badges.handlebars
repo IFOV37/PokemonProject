@@ -1,1 +1,23 @@
 <!-- badges handlebars --> 
+
+<h1>Badges in the Database:</h1>
+
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Color</th>
+	</thead>
+	<tbody>
+		{{#each badges}}
+		<tr>
+			<td>{{Name}}</td>
+			<td>{{Color}}</td>
+			<!-- add button for delete here -->
+			<!-- add link to update here -->
+		</tr>
+		{{/each}}
+	</tbody>
+
+	<!-- add form to add a pokemon, if we whish to do so here. -->
+
+</table>

@@ -1,3 +1,27 @@
 <!-- pokemon handlebars file -->
 
 <h1>Pokemon in the Pokedex:</h1>
+
+<table>
+	<thead>
+		<th>Name</th>
+		<th>Type</th>
+		<th>Attack</th>
+		<th>Trainer</th>
+	</thead>
+	<tbody>
+		{{#each pokemon}}
+		<tr>
+			<td>{{name}}</td>
+			<td>{{type}}</td>
+			<td>{{attack}}</td>
+			<td>{{Trainer}}</td>
+			<!-- add button for delete here -->
+			<!-- add link to update here -->
+		</tr>
+		{{/each}}
+	</tbody>
+
+	<!-- add form to add a pokemon, if we whish to do so here. -->
+
+</table>
