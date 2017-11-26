@@ -23,7 +23,7 @@ app.use('/static', express.static('public'));
 app.set('view engine', 'handlebars');
 
 // set the port to whatever [valid] number you want and set db stuff
-app.set('port', 33445);
+app.set('port', 37445);
 app.set('mysql', mysql);
 
 

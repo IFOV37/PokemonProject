@@ -1,16 +1,16 @@
 <!-- trainers handlebars -->
 
-<h1>Trainers in the Database:</h1>
+<h1>Trainers and Badge relationships in the Database:</h1>
 <table>
 	<thead>
-		<th>Name</th>
-		<th>Catchphrase</th>
+		<th>Trainer</th>
+		<th>Badge</th>
 	</thead>
 	<tbody>
-		{{#each pokemon}}
+		{{#each tb}}
 		<tr>
-			<td>{{Name}}</td>
-			<td>{{catchphrase}}</td>
+			<td>{{name}}</td>
+			<td>{{badge}}</td>
 			<!-- add button for delete here -->
 			<!-- add link to update here -->
 		</tr>

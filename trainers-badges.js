@@ -5,13 +5,13 @@ module.exports = function(){
     var router = express.Router();
 
     // get all pokemon in pokemon table
-    function getTrainers(res, mysql, context, complete){
-    	mysql.pool.query("SELECT id, name, catchphrase FROM Trainers", function(error, results, fields){
+    function getTrainersBadges(res, mysql, context, complete){
+    	mysql.pool.query("SELECT t.name, b.name AS 'badge' FROM Trainer_Badge tb INNER JOIN Trainers t ON t.ID = tb.trainerID INNER JOIN Badges b ON b.ID = tb.badgeID", function(error, results, fields){
     		if(error){
     			res.write(JSON.stringify(error));
     			res.end();
     		}
-            context.trainers = results;
+            context.tb = results;
             copmlete();
     	});
     }
@@ -24,12 +24,12 @@ module.exports = function(){
         //context.jsscripts = ["deletepokemon.js"]  // we need to pass our script/function if we want to actually be able to delete a pokemon  review if we want to later
         var mysql = req.app.get('mysql');
 
-        getTrainers(res, mysql, context, complete);
+        getTrainersBadges(res, mysql, context, complete);
 
         function complete(){
             callbackCount++;
             if(callbackCount >= 1){
-                res.render('trainers', context);
+                res.render('trainers-badges', context);
             }
         }
     });
