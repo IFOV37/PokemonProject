@@ -14,8 +14,8 @@
 			<td>{{name}}</td>
 			<td>{{GymLeader}}</td>
 			<td>{{GymBadge}}</td>
-			<!-- add button for delete here -->
-			<!-- add link to update here -->
+			<td><button onclick="deleteGym({{id}})">Delete</button></td>
+			<td><a href="/gyms/{{id}}">Update Gym Info</a></td>
 		</tr>
 		{{/each}}
 	</tbody>

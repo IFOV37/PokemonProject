@@ -12,8 +12,8 @@
 		<tr>
 			<td>{{name}}</td>
 			<td>{{color}}</td>
-			<!-- add button for delete here -->
-			<!-- add link to update here -->
+			<td><button onclick="deleteBadge({{id}})">Delete</button></td>
+			<td><a href="/badges/{{id}}">Update Badge Info</a></td>
 		</tr>
 		{{/each}}
 	</tbody>

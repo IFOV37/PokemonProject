@@ -16,8 +16,8 @@
 			<td>{{type}}</td>
 			<td>{{attack}}</td>
 			<td>{{Trainer}}</td>
-			<!-- add button for delete here -->
-			<!-- add link to update here -->
+			<td><button onclick="deletePokemon({{id}})">Delete</button></td>
+			<td><a href="/pokemon/{{id}}">Update Pokemon Info</a></td>
 		</tr>
 		{{/each}}
 	</tbody>
