@@ -16,6 +16,19 @@ module.exports = function(){
     	});
     }
 
+    function getTrainer(res, mysql, context, id, complete){
+        var sql = "SELECT id, name, catchphrase FROM Trainers WHERE id = ?";
+        var inserts = [id];
+        mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.trainer = results[0];
+            complete();
+        });
+    }
+
     /*Display all pokemon. Requires web based javascript to delete users with AJAX*/
 
     router.get('/', function(req, res){
@@ -40,7 +53,7 @@ module.exports = function(){
         context.jsscripts = ["update-trainers.js"];
         var mysql = req.app.get('mysql');
 
-        getTrainers(res, mysql, context, complete);
+        getTrainer(res, mysql, context, req.params.id, complete);
 
         function complete(){
             callbackCount++;
