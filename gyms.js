@@ -5,7 +5,7 @@ module.exports = function(){
     var router = express.Router();
 
     // get all pokemon in pokemon table
-    function getBadges(res, mysql, context, complete){
+    /*function getBadges(res, mysql, context, complete){
     	mysql.pool.query("SELECT id, name, color FROM Badges", function(error, results, fields){
     		if(error){
     			res.write(JSON.stringify(error));
@@ -38,7 +38,7 @@ module.exports = function(){
             context.pokemon = results;
             complete();
     	});
-    }
+    }*/
 
     // get all gyms in Gyms table
     function getGyms(res, mysql, context, complete){
@@ -50,6 +50,19 @@ module.exports = function(){
             context.gyms = results;
             complete();
     	});
+    }
+
+    function getGym(res, mysql, context, id, complete){
+        var sql = "SELECT Gyms.id, Gyms.name, Trainers.name AS 'leader', Badges.name AS 'badge' FROM Gyms INNER JOIN Trainers ON Trainers.id = Gyms.trainerID INNER JOIN Badges ON Badges.id = Gyms.badgeID WHERE id = ?";
+        var inserts = [id];
+        mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.gym = results[0];
+            complete();
+        });
     }
 
 
@@ -72,6 +85,43 @@ module.exports = function(){
                 res.render('gyms', context);
             }
         }
+    });
+
+
+    // allows us to pass an id to the gym page so we can navigate to the update-gym page
+    // to edit that specific gym's data
+    router.get('/:id', function(req, res){
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["update-gym.js"];
+        var mysql = req.app.get('mysql');
+
+        getGym(res, mysql, context, req.params.id, complete);
+
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('update-gym', context);
+            }
+
+        }
+    });
+
+    // called with the jquery ajax is used in update-trainer.js
+    // updates name and catchphrase for the trainer id passed, with the info passed
+    router.put('/:id', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE gyms SET name=? WHERE id=?";
+        var inserts = [req.body.name, req.params.id];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.status(200);
+                res.end();
+            }
+        });
     });
 
 
