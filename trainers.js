@@ -64,7 +64,20 @@ module.exports = function(){
         }
     });
 
-
+    router.put('/:id', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE Trainers SET name=?, catchphrase=? WHERE id=?";
+        var inserts = [req.body.name, req.body.catchphrase, req.params.id];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.status(200);
+                res.end();
+            }
+        });
+    });
 
     return router;
 }();
