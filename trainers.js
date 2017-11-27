@@ -34,6 +34,23 @@ module.exports = function(){
         }
     });
 
+    router.get('/:id', function(req, res){
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["update-trainers.js"];
+        var mysql = req.app.get('mysql');
+
+        getTrainers(res, mysql, context, complete);
+
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('update-trainers', context);
+            }
+
+        }
+    });
+
 
 
     return router;
