@@ -4,7 +4,7 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-    // get all pokemon in pokemon table
+    // get all trainers in Trainers table
     function getTrainers(res, mysql, context, complete){
     	mysql.pool.query("SELECT id, name, catchphrase FROM Trainers", function(error, results, fields){
     		if(error){
@@ -16,6 +16,7 @@ module.exports = function(){
     	});
     }
 
+    // returns a single trainer where the user selected the update link (on the id)
     function getTrainer(res, mysql, context, id, complete){
         var sql = "SELECT id, name, catchphrase FROM Trainers WHERE id = ?";
         var inserts = [id];
@@ -31,6 +32,7 @@ module.exports = function(){
 
     /*Display all pokemon. Requires web based javascript to delete users with AJAX*/
 
+    // displays all trainers in Trainers table
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -47,10 +49,13 @@ module.exports = function(){
         }
     });
 
+
+    // allows us to pass an id to the trainers page so we can navigate to the update-trainer page
+    // to edit that specific trainer's data
     router.get('/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["update-trainers.js"];
+        context.jsscripts = ["update-trainer.js"];
         var mysql = req.app.get('mysql');
 
         getTrainer(res, mysql, context, req.params.id, complete);
@@ -58,12 +63,14 @@ module.exports = function(){
         function complete(){
             callbackCount++;
             if(callbackCount >= 1){
-                res.render('update-trainers', context);
+                res.render('update-trainer', context);
             }
 
         }
     });
 
+    // called with the jquery ajax is used in update-trainer.js
+    // updates name and catchphrase for the trainer id passed, with the info passed
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE Trainers SET name=?, catchphrase=? WHERE id=?";

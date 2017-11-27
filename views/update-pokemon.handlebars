@@ -1,0 +1,11 @@
+<!-- pokemon update handlebars form-->
+
+<h1>Update {{pokemon.name}}:</h1>
+<form id="update-pokemon" action="/pokemon" method="post">
+    Name: <input type="text" name="name" value="{{pokemon.name}}"><br>
+    Type: <input type="text" name="type" value="{{pokemon.type}}"><br>
+    Attack: <input type="text" name="attack" value="{{pokemon.attack}}"><br>
+    <!-- Trainer: <input type="text" name="trainer" value="{{pokemon.trainer}}" disabled><br> -->
+    <label for="trainer">{{pokemon.Trainer}}</label>
+</form>
+<button onclick="updatePokemon({{pokemon.id}})">Update</button>

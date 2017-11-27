@@ -1,8 +1,8 @@
-<!-- trainers update handlebars -->
+<!-- trainer update handlebars form-->
 
 <h1>Update {{trainer.name}}:</h1>
-<form id="update-trainers" action="/trainers" method="post">
+<form id="update-trainer" action="/trainers" method="post">
     Name: <input type="text" name="name" value="{{trainer.name}}"><br>
     Catchphrase: <input type="text" name="catchphrase" value="{{trainer.catchphrase}}"><br>
 </form>
-<button onclick="updateTrainers({{trainer.id}})">Update</button>
+<button onclick="updateTrainer({{trainer.id}})">Update</button>

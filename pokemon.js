@@ -16,8 +16,23 @@ module.exports = function(){
     	});
     }
 
+    // get single pokemon by id
+    function getSinglePokemon(res, mysql, context, id, complete){
+
+        var sql = "SELECT p.id, p.name, p.type, p.attack, t.name AS 'Trainer' FROM Pokemon p INNER JOIN Trainers t ON t.id = p.trainerID WHERE id = ?";
+        var inserts = [id];
+        mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.pokemon = results[0];
+            complete();
+        });
+    }
+
     // get all trainers in the trainer table
-    function getTrainers(res, mysql, context, complete){
+    /*function getTrainers(res, mysql, context, complete){
         mysql.pool.query("SELECT id, name, catchphrase FROM Trainers", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -26,7 +41,9 @@ module.exports = function(){
             context.trainers = results;
             complete();
         });
-    }
+    }*/
+
+
 
     /*Display all pokemon. Requires web based javascript to delete users with AJAX*/
 
@@ -46,6 +63,44 @@ module.exports = function(){
             }
         }
     });
+
+
+    // allows us to pass an id to the pokemon page so we can navigate to the update-pokemon page
+    // to edit that specific pokemon's data
+    router.get('/:id', function(req, res){
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["update-pokemon.js"];
+        var mysql = req.app.get('mysql');
+
+        getSinglePokemon(res, mysql, context, req.params.id, complete);
+
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('update-pokemon', context);
+            }
+
+        }
+    });
+
+    // called with the jquery ajax is used in update-pokemon.js
+    // updates name, type, and attack for the pokemon id passed, with the info passed
+    router.put('/:id', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE Pokemon SET name=?, type=?, attack=? WHERE id=?";
+        var inserts = [req.body.name, req.body.type, req.body.attack, req.params.id];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.status(200);
+                res.end();
+            }
+        });
+    });
+
 
 
 

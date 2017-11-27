@@ -4,7 +4,7 @@ module.exports = function(){
     var express = require('express');
     var router = express.Router();
 
-    // get all pokemon in pokemon table
+    // get all badges in Badges table
     function getBadges(res, mysql, context, complete){
     	mysql.pool.query("SELECT id, name, color FROM Badges", function(error, results, fields){
     		if(error){
@@ -16,8 +16,24 @@ module.exports = function(){
     	});
     }
 
+     // returns a single badge where the user selected the update link (on the id)
+    function getBadge(res, mysql, context, id, complete){
+    	var sql = "SELECT id, name, color FROM Badges WHERE id=?";
+    	var inserts = [id];
+    	mysql.pool.query(sql, inserts, function(error, results, fields){
+    		if(error){
+    			res.write(JSON.stringify(error));
+    			res.end();
+    		}
+            context.badge = results[0];
+            complete();
+    	});
+    }
+
+
     /*Display all pokemon. Requires web based javascript to delete users with AJAX*/
 
+    // displays all badges in Badges table
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -32,6 +48,42 @@ module.exports = function(){
                 res.render('badges', context);
             }
         }
+    });
+
+    // allows us to pass an id to the badges page so we can navigate to the update-badge page
+    // to edit that specific badge's data
+    router.get('/:id', function(req, res){
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["update-badge.js"];
+        var mysql = req.app.get('mysql');
+
+        getBadge(res, mysql, context, req.params.id, complete);
+
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('update-badge', context);
+            }
+
+        }
+    });
+
+    // called with the jquery ajax is used in update-badge.js
+    // updates name and catchphrase for the badge id passed, with the info passed
+    router.put('/:id', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE Badges SET name=?, color=? WHERE id=?";
+        var inserts = [req.body.name, req.body.color, req.params.id];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.status(200);
+                res.end();
+            }
+        });
     });
 
 
