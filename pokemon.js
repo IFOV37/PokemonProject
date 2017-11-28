@@ -19,7 +19,7 @@ module.exports = function(){
     // get single pokemon by id
     function getSinglePokemon(res, mysql, context, id, complete){
 
-        var sql = "SELECT p.id, p.name, p.type, p.attack, t.name AS 'Trainer' FROM Pokemon p INNER JOIN Trainers t ON t.id = p.trainerID WHERE id = ?";
+        var sql = "SELECT p.id, p.name, p.type, p.attack, t.name AS 'Trainer' FROM Pokemon p INNER JOIN Trainers t ON t.id = p.trainerID WHERE p.id = ?";
         var inserts = [id];
         mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){

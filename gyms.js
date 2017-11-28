@@ -53,7 +53,7 @@ module.exports = function(){
     }
 
     function getGym(res, mysql, context, id, complete){
-        var sql = "SELECT Gyms.id, Gyms.name, Trainers.name AS 'leader', Badges.name AS 'badge' FROM Gyms INNER JOIN Trainers ON Trainers.id = Gyms.trainerID INNER JOIN Badges ON Badges.id = Gyms.badgeID WHERE id = ?";
+        var sql = "SELECT Gyms.id, Gyms.name, Trainers.name AS 'leader', Badges.name AS 'badge' FROM Gyms INNER JOIN Trainers ON Trainers.id = Gyms.trainerID INNER JOIN Badges ON Badges.id = Gyms.badgeID WHERE Gyms.id = ?";
         var inserts = [id];
         mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
