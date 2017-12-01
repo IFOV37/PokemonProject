@@ -5,7 +5,7 @@ module.exports = function(){
     var router = express.Router();
 
     // get all pokemon in pokemon table
-    /*function getBadges(res, mysql, context, complete){
+    function getBadges(res, mysql, context, complete){
     	mysql.pool.query("SELECT id, name, color FROM Badges", function(error, results, fields){
     		if(error){
     			res.write(JSON.stringify(error));
@@ -38,7 +38,7 @@ module.exports = function(){
             context.pokemon = results;
             complete();
     	});
-    }*/
+    }
 
     // get all gyms in Gyms table
     function getGyms(res, mysql, context, complete){

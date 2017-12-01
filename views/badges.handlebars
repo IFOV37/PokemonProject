@@ -1,11 +1,19 @@
 <!-- badges handlebars --> 
 
+<style>
+table, th, td{
+	border: 1px solid black;
+}
+</style>
+
 <h1>Badges in the Database:</h1>
 
 <table>
 	<thead>
 		<th>Name</th>
 		<th>Color</th>
+		<th>Delete</th>
+		<th>Update</th>
 	</thead>
 	<tbody>
 		{{#each badges}}
@@ -21,3 +29,10 @@
 	<!-- add form to add a pokemon, if we whish to do so here. -->
 
 </table>
+<p>To visit the pages with data, here are the links:</p>
+<a href="/home">Home</a>
+<a href="/pokemon">Pokemon</a>
+<a href="/trainers">Trainers</a>
+<a href="/badges">Badges</a>
+<a href="/gyms">Gyms</a>
+<a href="/trainers-badges">Trainers-Badges</a>

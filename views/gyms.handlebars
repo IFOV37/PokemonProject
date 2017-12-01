@@ -1,5 +1,11 @@
 <!-- gyms handlebars --> 
 
+<style>
+table, th, td{
+	border: 1px solid black;
+}
+</style>
+
 <h1>Gyms in the Pokedex:</h1>
 
 <table>
@@ -7,6 +13,8 @@
 		<th>Name</th>
 		<th>Gym Leader</th>
 		<th>Gym Badge</th>
+		<th>Delete</th>
+		<th>Update</th>
 	</thead>
 	<tbody>
 		{{#each gyms}}
@@ -23,3 +31,9 @@
 	<!-- add form to add a pokemon, if we whish to do so here. -->
 
 </table>
+<p>To visit the pages with data, here are the links:</p>
+<a href="/pokemon">Pokemon</a>
+<a href="/trainers">Trainers</a>
+<a href="/badges">Badges</a>
+<a href="/gyms">Gyms</a>
+<a href="/trainers-badges">Trainers-Badges</a>
