@@ -20,7 +20,7 @@ module.exports = function(){
     function getSinglePokemon(res, mysql, context, id, complete){
 
         var sql = "SELECT p.id, p.name, p.type, p.attack, t.name AS 'Trainer' FROM Pokemon p INNER JOIN Trainers t ON t.id = p.trainerID WHERE p.id = ?";
-        var inserts = [id];
+        var inserts = [p.id];
         mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -50,7 +50,7 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deletepokemon.js"]  // we need to pass our script/function if we want to actually be able to delete a pokemon  review if we want to later
+        context.jsscripts = ["delete-pokemon.js"]  // we need to pass our script/function if we want to actually be able to delete a pokemon  review if we want to later
         var mysql = req.app.get('mysql');
 
         getPokemon(res, mysql, context, complete);
