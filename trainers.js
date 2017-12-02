@@ -49,6 +49,21 @@ module.exports = function(){
         }
     });
 
+    /* Adds a trainer, redirects to the trainer page after adding */
+
+    router.post('/', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO Trainers (name, catchphrase) VALUES (?,?)";
+        var inserts = [req.body.name, req.body.catchphrase];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/trainers');
+            }
+        });
+    });
 
     // allows us to pass an id to the trainers page so we can navigate to the update-trainer page
     // to edit that specific trainer's data

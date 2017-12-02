@@ -50,7 +50,7 @@ module.exports = function(){
         }
     });
 
-        /* Adds a person, redirects to the people page after adding */
+        /* Adds a badge, redirects to the badge page after adding */
 
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');

@@ -8,6 +8,12 @@ table, th, td{
 
 <h1>Badges in the Database:</h1>
 
+<form id="addBadge" action="/badges" method="post">
+    Name: <br><input type="text" name="name"><br><br>
+    Color: <br><input type="text" name="color"><br><br>
+    <input type="submit" value="Submit">
+</form>
+
 <table>
 	<thead>
 		<th>Name</th>
@@ -26,11 +32,6 @@ table, th, td{
 		{{/each}}
 	</tbody>
 
-	<form id="addBadge" action="/badges" method="post">
-    Name: <br><input type="text" name="name"><br><br>
-    Color: <br><input type="text" name="color"><br><br>
-    <input type="submit" value="Submit">
-    </form>
 
 	<!-- add form to add a pokemon, if we whish to do so here. -->
 
