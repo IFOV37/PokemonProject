@@ -13,7 +13,12 @@ table, th, td{
     <input type="text" name="name" value="{{trainer.name}}"><br>
     <br>
 	Catchphrase: <br>
-    <input type="text" name="catchphrase" value="{{trainer.catchphrase}}"><br>
+    <input type="text" name="catchphrase" value="{{trainer.catchphrase}}"><br><br>
+    Add Badge: <br><select name="badge" id="badge-selector"> 
+        {{#each trainers}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select>
 </form>
 <br>
 <button onclick="updateTrainer({{trainer.id}})">Update</button>
@@ -21,10 +26,10 @@ table, th, td{
 <br>
 <table>
 	<thead>
-		<th>Badge</th>
+		<th>Badges Owned</th>
 	</thead>
 	<tbody>
-		{{#each tb}}
+		{{#each badgesOwned}}
 		<tr>
 			<td>{{name}}</td>
 		</tr>
