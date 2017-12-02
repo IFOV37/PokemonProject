@@ -135,20 +135,20 @@ module.exports = function(){
 
 
 
-    router.put('/add-badge/:id', function(req, res){
+    router.post('/add-badge/', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Trainer_Badge (trainerID, badgeID) VALUES (?,?)";
-        var inserts = [req.params.id, req.body.badge];
-        console.log(req.params.id);
+        var inserts = [req.body.trainerID, req.body.badge];
+        console.log(req.body.trainerID);
         console.log(req.body.badge);
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }else{
-                //res.redirect('/trainers/add-badge');
-                res.status(200);
-                res.end();
+                res.redirect('/trainers/add-badge');
+                //res.status(200);
+                //res.end();
             }
         });
     });
