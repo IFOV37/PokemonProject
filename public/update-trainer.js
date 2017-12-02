@@ -2,7 +2,7 @@
 
 function updateTrainer(id){
     $.ajax({
-        url: '/trainers/update/' + id,
+        url: '/trainers/' + id,
         type: 'PUT',
         data: $('#update-trainer').serialize(),
         success: function(result){
