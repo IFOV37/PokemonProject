@@ -156,8 +156,8 @@ module.exports = function(){
     router.post('/add-badge/', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Trainer_Badge (trainerID, badgeID) VALUES (?,?)";
-        req.body.trainerID = parseInt(req.body.trainerID, 2);
-        req.body.trainerID = parseInt(req.body.badge, 2);
+        //req.body.trainerID = parseInt(req.body.trainerID, 2);
+        //req.body.trainerID = parseInt(req.body.badge, 2);
         var inserts = [req.body.trainerID, req.body.badge];
         console.log(req.body);
         console.log(req.body.trainerID);
