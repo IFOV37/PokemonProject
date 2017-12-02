@@ -167,7 +167,7 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             }else{
-                res.redirect('/trainers/add-badge');
+                res.redirect('/trainers/add-badge/:id');
                 //res.status(200);
                 //res.end();
             }
