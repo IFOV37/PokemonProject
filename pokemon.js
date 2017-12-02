@@ -109,6 +109,7 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE Pokemon SET name=?, type=?, attack=?, trainerID=? WHERE id=?";
         var inserts = [req.body.name, req.body.type, req.body.attack, req.body.trainer, req.params.id];
+        console.log(req.body);
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
