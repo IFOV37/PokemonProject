@@ -58,7 +58,7 @@ module.exports = function(){
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 2){
+            if(callbackCount >= 1){
                 res.render('pokemon', context);
             }
         }
