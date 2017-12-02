@@ -95,6 +95,24 @@ module.exports = function(){
         });
     });
 
+    router.get('/add-badge/:id', function(req, res){
+        callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["add-badge.js"];
+        var mysql = req.app.get('mysql');
+
+        //getTrainer(res, mysql, context, req.params.id, complete);
+        getTrainersBadges(res, mysql, context, req.params.id, complete);
+        getBadgesNotOwned(res, mysql, context, complete);
+
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 2){
+                res.render('add-badge', context);
+            }
+        }
+    });
+    
     // allows us to pass an id to the trainers page so we can navigate to the update-trainer page
     // to edit that specific trainer's data
     router.get('/:id', function(req, res){
@@ -115,23 +133,7 @@ module.exports = function(){
         }
     });
 
-    router.get('/add-badge/:id', function(req, res){
-        callbackCount = 0;
-        var context = {};
-        context.jsscripts = ["add-badge.js"];
-        var mysql = req.app.get('mysql');
 
-        //getTrainer(res, mysql, context, req.params.id, complete);
-        getTrainersBadges(res, mysql, context, req.params.id, complete);
-        getBadgesNotOwned(res, mysql, context, complete);
-
-        function complete(){
-            callbackCount++;
-            if(callbackCount >= 2){
-                res.render('add-badge', context);
-            }
-        }
-    });
 
     router.put('/add-badge/:id', function(req, res){
         var mysql = req.app.get('mysql');

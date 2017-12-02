@@ -14,11 +14,6 @@ table, th, td{
     <br>
 	Catchphrase: <br>
     <input type="text" name="catchphrase" value="{{trainer.catchphrase}}"><br><br>
-    Add Badge: <br><select name="badge" id="badge-selector"> 
-        {{#each badgesNotOwned}}
-        <option value="{{id}}">{{name}}</option>
-        {{/each}}
-    </select>
 </form>
 <br>
 <button onclick="updateTrainer({{trainer.id}})">Update</button>
