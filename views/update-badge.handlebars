@@ -1,10 +1,14 @@
 <!-- badge update handlebars -->
 
 <h1>Update {{badge.name}} Badge:</h1>
+<h3>Note: After updating information, hit the Update button - DO NOT PRESS ENTER</h3>
 <form id="update-badge" action="/badges" method="post">
-    Name: <input type="text" name="name" value="{{badge.name}}"><br>
-    Color: <input type="text" name="color" value="{{badge.color}}"><br>
+    Name: <br>
+    <input type="text" name="name" value="{{badge.name}}"><br>
+    Color: <br>
+    <input type="text" name="color" value="{{badge.color}}"><br>
 </form>
+<br>
 <button onclick="updateBadge({{badge.id}})">Update</button>
 <p>To visit the pages with data, here are the links:</p>
 <a href="/pokemon">Pokemon</a>
