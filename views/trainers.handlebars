@@ -22,6 +22,7 @@ table, th, td{
 		<th>Catchphrase</th>
 		<th>Delete</th>
 		<th>Update</th>
+		<th>Badges</th>
 	</thead>
 	<tbody>
 		{{#each trainers}}
@@ -30,7 +31,7 @@ table, th, td{
 			<td>{{catchphrase}}</td>
 			<td><button onclick="deleteTrainer({{id}})">Delete</button></td>
 			<td><a href="/trainers/{{id}}">Update Trainer Info</a></td>
-			<td><a href-"/add-badge/{{id}}">Add a Badge</a></td>
+			<td><a href="/add-badge/{{id}}">Add a Badge</a></td>
 		</tr>
 		{{/each}}
 	</tbody>
