@@ -54,11 +54,11 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
 
         getPokemon(res, mysql, context, complete);
-        getTrainers(res, mysql, context, complete);
+        //getTrainers(res, mysql, context, complete);
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 2){
                 res.render('pokemon', context);
             }
         }
@@ -74,10 +74,11 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
 
         getSinglePokemon(res, mysql, context, req.params.id, complete);
+        getTrainers(res, mysql, context, complete);
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 2){
                 res.render('update-pokemon', context);
             }
 
