@@ -70,7 +70,7 @@ module.exports = function(){
     router.get('/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["update-pokemon.js"];
+        context.jsscripts = ["update-pokemon.js", "select-trainer.js"];
         var mysql = req.app.get('mysql');
 
         getSinglePokemon(res, mysql, context, req.params.id, complete);
@@ -108,7 +108,7 @@ module.exports = function(){
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE Pokemon SET name=?, type=?, attack=?, trainerID=? WHERE id=?";
-        var inserts = [req.body.name, req.body.type, req.body.attack, 10, req.params.id];
+        var inserts = [req.body.name, req.body.type, req.body.attack, req.body.Trainer, req.params.id];
         console.log(type(req.body.Trainer));
 	console.log(req.body.Trainer);
 	console.log(req.params.id);

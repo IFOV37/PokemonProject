@@ -13,7 +13,7 @@
 	Attack: <br>
     <input type="text" name="attack" value="{{pokemon.attack}}"><br>
      <br>
-	Trainer: <br><select name="Trainer"> 
+	Trainer: <br><select name="Trainer" id="trainer-selector"> 
         {{#each trainers}}
         <option value="{{id}}">{{name}}</option>
         {{/each}}
@@ -23,6 +23,7 @@
 </form>
 <br>
 <button onclick="updatePokemon({{pokemon.id}})">Update</button>
+<script defer>selectTrainer({{trainers.id}});</script>
 <p>To visit the pages with data, here are the links:</p>
 <a href="/pokemon">Pokemon</a>
 <a href="/trainers">Trainers</a>
