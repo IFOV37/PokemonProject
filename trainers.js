@@ -209,7 +209,7 @@ module.exports = function(){
 
     router.delete('/deleteBadge/:bid/:tid', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "DELETE FROM Trainer_Badge WHERE bid = ? AND tid = ?";
+        var sql = "DELETE FROM Trainer_Badge WHERE badgeID = ? AND trainerID = ?";
         console.log(req.params.bid);
         console.log(req.params.tid);
         var inserts = [req.params.bid, req.params.tid];
