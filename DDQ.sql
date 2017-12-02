@@ -8,7 +8,6 @@ CREATE TABLE `Pokemon` (
 `attack` varchar(255) NOT NULL,
 `trainerID` int(11),
 PRIMARY KEY (`id`),
-FOREIGN KEY (`trainerID`) REFERENCES `Trainer` (`id`) ON DELETE SET NULL,
 UNIQUE (`name`)
 )ENGINE=InnoDB;
 
