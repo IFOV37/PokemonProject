@@ -2,7 +2,7 @@
 
 function addBadge(id){
     $.ajax({
-        url: '/trainers/add-badge' + id,
+        url: '/trainers/add-badge/' + id,
         type: 'PUT',
         data: $('#add-badge').serialize(),
         success: function(result){
