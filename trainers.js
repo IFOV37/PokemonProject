@@ -49,7 +49,7 @@ module.exports = function(){
         }
     });
 
-    /* Adds a trainer, redirects to the trainer page after adding */
+    /* Adds a trainer, redirects to the trainers page after adding */
 
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
