@@ -10,6 +10,11 @@
 	Catchphrase: <br>
     <input type="text" name="catchphrase" value="{{trainer.catchphrase}}"><br>
      <br>
+    Pokemon: <br><select name="pokemon" id="pokemon">
+        {{#each pokemon}}
+            <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select><br><br>
 	Badges: <br><select name="Badge"> 
         {{#each badges}}
         <option value="{{id}}">{{name}}</option>

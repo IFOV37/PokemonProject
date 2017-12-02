@@ -12,19 +12,20 @@ table, th, td{
 <form id="addTrainer" action="/trainers" method="post">
     Name: <br><input type="text" name="name"><br><br>
     Catchphrase: <br><input type="text" name="catchphrase"><br><br>
-    <select name="Pokemon" id="Pokemon">
-        {{#each Pokemon}}
-            <option value="{{id}} = NULL">{{name}}</option>
+    Pokemon: <br><select name="Pokemon" id="pokemon-selector">
+        {{#each pokemon}}
+            <option value="{{id}}">{{name}}</option>
         {{/each}}
-    </select><br>
+    </select><br><br>
     <input type="submit" value="Submit">
 </form>
 <br>
-
+<script defer>selectPokemon({{pokemon.id}});</script>
 <table>
 	<thead>
 		<th>Name</th>
 		<th>Catchphrase</th>
+		<th>Pokemon</th>
 		<th>Delete</th>
 		<th>Update</th>
 	</thead>

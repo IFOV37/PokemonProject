@@ -6,7 +6,7 @@ module.exports = function(){
 
     // get all trainers in Trainers table
     function getTrainers(res, mysql, context, complete){
-    	mysql.pool.query("SELECT id, name, catchphrase, p.name AS pokemon FROM Trainers INNER JOIN Pokemon p ON p.trainerID = Trainers.id", function(error, results, fields){
+    	mysql.pool.query("SELECT Trainers.id, Trainers.name, catchphrase, p.name AS pokemon FROM Trainers INNER JOIN Pokemon p ON p.trainerID = Trainers.id", function(error, results, fields){
     		if(error){
     			res.write(JSON.stringify(error));
     			res.end();
@@ -66,8 +66,8 @@ module.exports = function(){
 
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO Trainers (name, catchphrase) VALUES (?,?)";
-        var inserts = [req.body.name, req.body.catchphrase];
+        var sql = "INSERT INTO Trainers (name, catchphrase, pokemon) VALUES (?,?, ?)";
+        var inserts = [req.body.name, req.body.catchphrase, req.body.pokemon];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -102,8 +102,8 @@ module.exports = function(){
     // updates name and catchphrase for the trainer id passed, with the info passed
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE Trainers SET name=?, catchphrase=? WHERE id=?";
-        var inserts = [req.body.name, req.body.catchphrase, req.params.id];
+        var sql = "UPDATE Trainers SET name=?, catchphrase=?, pokemon=? WHERE id=?";
+        var inserts = [req.body.name, req.body.catchphrase, req.body.pokemon, req.params.id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
