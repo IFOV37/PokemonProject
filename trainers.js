@@ -155,7 +155,7 @@ module.exports = function(){
 
     // called with the jquery ajax is used in update-trainer.js
     // updates name and catchphrase for the trainer id passed, with the info passed
-    router.put('/:id', function(req, res){
+    router.put('/update/:id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE Trainers SET name=?, catchphrase=?, WHERE id=?";
         var inserts = [req.body.name, req.body.catchphrase, req.params.id];
