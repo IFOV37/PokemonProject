@@ -15,7 +15,7 @@ table, th, td{
 	Catchphrase: <br>
     <input type="text" name="catchphrase" value="{{trainer.catchphrase}}"><br><br>
     Add Badge: <br><select name="badge" id="badge-selector"> 
-        {{#each trainers}}
+        {{#each badgesNotOwned}}
         <option value="{{id}}">{{name}}</option>
         {{/each}}
     </select>
