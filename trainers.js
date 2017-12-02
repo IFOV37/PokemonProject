@@ -48,9 +48,9 @@ module.exports = function(){
     function getBadgesNotOwned(res, mysql, context, id, complete){
         //var sql = "SELECT b.id, b.name FROM Badges b RIGHT JOIN Trainer_Badge tb ON b.ID = tb.badgeID WHERE tb.trainerID <> ";
         //var sql = "SELECT Badges.id, Badges.name FROM Badges WHERE Badges.name NOT IN (SELECT b.name FROM Badges b INNER JOIN Trainer_Badge tb ON tb.badgeID = b.id WHERE tb.trainerID = ?) ORDER BY Badges.id ASC";
-        var sql = "SELECT DISTINCT b.id, tb.trainerID FROM Badges b LEFT JOIN Trainer_Badge tb ON tb.badgeID = b.id WHERE ? NOT IN (SELECT b.id FROM Badges b INNER JOIN Trainer_Badge tb ON tb.badgeID = b.id INNER JOIN Trainers t ON t.id = tb.trainerID)";
-        var inserts = [id];
-        mysql.pool.query(sql, inserts, function(error, results, fields){
+        //var sql = "SELECT DISTINCT b.id, tb.trainerID FROM Badges b LEFT JOIN Trainer_Badge tb ON tb.badgeID = b.id WHERE id NOT IN (SELECT b.id FROM Badges b INNER JOIN Trainer_Badge tb ON tb.badgeID = b.id INNER JOIN Trainers t ON t.id = tb.trainerID)";
+        //var inserts = [id];
+        mysql.pool.query("SELECT DISTINCT b.id, tb.trainerID FROM Badges b LEFT JOIN Trainer_Badge tb ON tb.badgeID = b.id WHERE id NOT IN (SELECT b.id FROM Badges b INNER JOIN Trainer_Badge tb ON tb.badgeID = b.id INNER JOIN Trainers t ON t.id = tb.trainerID)", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
