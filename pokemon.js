@@ -20,7 +20,7 @@ module.exports = function(){
     function getSinglePokemon(res, mysql, context, id, complete){
 
         //var sql = "SELECT p.id, p.name, p.type, p.attack, t.name AS 'Trainer' FROM Pokemon p LEFT JOIN Trainers t ON t.id = p.trainerID WHERE p.id = ?";
-        var sql = "SELECT p.id, p.name, p.type, p.attack, p.trainerID FROM Pokemon p WHERE p.id = ?";
+        var sql = "SELECT id, name, type, attack, trainerID FROM Pokemon WHERE id = ?";
         var inserts = [id];
         mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
@@ -110,7 +110,7 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE Pokemon SET name=?, type=?, attack=?, trainerID=? WHERE id=?";
         var inserts = [req.body.name, req.body.type, req.body.attack, req.body.Trainer, req.params.id];
-        console.log(type(req.body.Trainer));
+        console.log(typeof(req.body.Trainer));
 	console.log(req.body.Trainer);
 	console.log(req.params.id);
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
