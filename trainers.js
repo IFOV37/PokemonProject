@@ -133,7 +133,7 @@ module.exports = function(){
 */
     // allows us to pass an id to the trainers page so we can navigate to the update-trainer page
     // to edit that specific trainer's data
-    router.get('/update/:id', function(req, res){
+    router.get('/:id', function(req, res){
         callbackCount = 0;
         var context = {};
         context.jsscripts = ["update-trainer.js"];
