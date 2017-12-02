@@ -98,7 +98,7 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             }else{
-                res.redirect('/badges');
+                res.redirect('/gyms');
             }
         });
     });

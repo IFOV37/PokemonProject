@@ -29,13 +29,17 @@ table, th, td{
 	</tbody>
 
     <form id="addGym" action="/gyms" method="post">
-    Name: <input type="text" name="fname"><br>
-    Trainer: <select name="trainer"> 
+    Name: <br><input type="text" name="name"><br><br>
+    Trainer: <br><select name="trainer"> 
         {{#each trainers}}
         <option value="{{trainers.id}}">{{trainers.name}}</option>
         {{/each}}
-    </select><br>
-    Age: <input type="number" name="age"><br>
+    </select><br><br>
+    Badge: <br><select name="badge"> 
+        {{#each badges}}
+        <option value="{{badges.id}}">{{badges.name}}</option>
+        {{/each}}
+    </select><br><br>
     <input type="submit" value="Submit">
     </form>
 	<!-- add form to add a pokemon, if we whish to do so here. -->

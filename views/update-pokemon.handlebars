@@ -13,8 +13,12 @@
 	Attack: <br>
     <input type="text" name="attack" value="{{pokemon.attack}}"><br>
      <br>
-	Trainer: <br>
-    <input type="text" name="trainer" value="{{pokemon.trainer}}"> <br>
+	Trainer: <br><select name="trainer"> 
+        {{#each trainers}}
+        <option value="{{trainers.id}}">{{trainers.name}}</option>
+        {{/each}}
+    </select>
+    <!-- <input type="text" name="trainer" value="{{pokemon.trainer}}"> <br> -->
     <!--  <label for="trainer">Trainer: {{pokemon.Trainer}}</label> -->
 </form>
 <br>

@@ -32,7 +32,7 @@ module.exports = function(){
     }
 
     // get all trainers in the trainer table
-    /*function getTrainers(res, mysql, context, complete){
+    function getTrainers(res, mysql, context, complete){
         mysql.pool.query("SELECT id, name, catchphrase FROM Trainers", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -41,7 +41,7 @@ module.exports = function(){
             context.trainers = results;
             complete();
         });
-    }*/
+    }
 
 
 
@@ -84,12 +84,29 @@ module.exports = function(){
         }
     });
 
+    /* Adds a person, redirects to the people page after adding */
+
+    router.post('/', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO Pokemon (name, type, attack) VALUES (?,?,?)";
+        var inserts = [req.body.name, req.body.type, req.body.attack, req.body.trainer];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/pokemon');
+            }
+        });
+    });
+
+
     // called with the jquery ajax is used in update-pokemon.js
     // updates name, type, and attack for the pokemon id passed, with the info passed
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE Pokemon SET name=?, type=?, attack=? WHERE id=?";
-        var inserts = [req.body.name, req.body.type, req.body.attack, req.params.id];
+        var sql = "UPDATE Pokemon SET name=?, type=?, attack=?, trainerID=? WHERE id=?";
+        var inserts = [req.body.name, req.body.type, req.body.attack, req.body.trainer, req.params.id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
