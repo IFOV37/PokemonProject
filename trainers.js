@@ -50,7 +50,7 @@ module.exports = function(){
         //var sql = "SELECT Badges.id, Badges.name FROM Badges WHERE Badges.name NOT IN (SELECT b.name FROM Badges b INNER JOIN Trainer_Badge tb ON tb.badgeID = b.id WHERE tb.trainerID = ?) ORDER BY Badges.id ASC";
         //var sql = "SELECT DISTINCT b.id, tb.trainerID FROM Badges b LEFT JOIN Trainer_Badge tb ON tb.badgeID = b.id WHERE id NOT IN (SELECT b.id FROM Badges b INNER JOIN Trainer_Badge tb ON tb.badgeID = b.id INNER JOIN Trainers t ON t.id = tb.trainerID)";
         //var inserts = [id];
-        mysql.pool.query("SELECT id, name FROM Badges", function(error, results, fields){
+        mysql.pool.query("SELECT id, name FROM Badges ORDER BY id ASC", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -104,13 +104,31 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
 
         getTrainer(res, mysql, context, req.params.id, complete);
-        //getTrainersBadges(res, mysql, context, req.params.id, complete);
+        getTrainersBadges(res, mysql, context, req.params.id, complete);
         getBadgesNotOwned(res, mysql, context, complete);
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 2){
+            if(callbackCount >= 3){
                 res.render('update-trainer', context);
+            }
+        }
+    });
+
+    router.get('/add-badge/:id', function(req, res){
+        callbackCount = 0;
+        var context = {};
+        //context.jsscripts = ["update-trainer.js"];
+        var mysql = req.app.get('mysql');
+
+        getTrainer(res, mysql, context, req.params.id, complete);
+        getTrainersBadges(res, mysql, context, req.params.id, complete);
+        getBadgesNotOwned(res, mysql, context, complete);
+
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 3){
+                res.render('add-badge', context);
             }
         }
     });
@@ -119,7 +137,7 @@ module.exports = function(){
     // updates name and catchphrase for the trainer id passed, with the info passed
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE Trainers SET name=?, catchphrase=? WHERE id=?";
+        var sql = "UPDATE Trainers SET name=?, catchphrase=?, WHERE id=?";
         var inserts = [req.body.name, req.body.catchphrase, req.params.id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
@@ -130,6 +148,7 @@ module.exports = function(){
                 res.end();
             }
         });
+
     });
 
     router.delete('/:id', function(req, res){

@@ -5,15 +5,11 @@ table, th, td{
 }
 </style>
 
-<h1>Update {{trainer.name}}:</h1>
+<h1>Add Badge to {{trainer.name}}:</h1>
 <h4>Note: After updating information, hit the Update button - DO NOT PRESS ENTER</h4>
+<h4 color="red">After adding the badges you want, click the Trainers link at the bottom to return to the Trainers page</h4>
 
-<form id="update-trainer" action="/trainers" method="post">
-    Name: <br><br>
-    <input type="text" name="name" value="{{trainer.name}}"><br>
-    <br>
-	Catchphrase: <br>
-    <input type="text" name="catchphrase" value="{{trainer.catchphrase}}"><br><br>
+<form id="add-badge" action="/add-badge" method="post">
     Add Badge: <br><select name="badge" id="badge-selector"> 
         {{#each badgesNotOwned}}
         <option value="{{id}}">{{name}}</option>
@@ -21,9 +17,24 @@ table, th, td{
     </select>
 </form>
 <br>
-<button onclick="updateTrainer({{trainer.id}})">Update</button>
+<button onclick="addBadge({{trainer.id}})">Update</button>
 <br>
 <br>
+<table>
+	<thead>
+		<th>Badges Owned</th>
+	</thead>
+	<tbody>
+		{{#each badgesOwned}}
+		<tr>
+			<td>{{name}}</td>
+		</tr>
+		{{/each}}
+	</tbody>
+
+	<!-- add form to add a pokemon, if we whish to do so here. -->
+
+</table>
 
 <br>
 <p>To visit the pages with data, here are the links:</p>
