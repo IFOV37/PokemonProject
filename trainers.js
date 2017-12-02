@@ -98,7 +98,7 @@ module.exports = function(){
     router.get('/add-badge/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["add-badge.js"];
+        context.jsscripts = ["add-badge.js", "deladd-badge.js"];
         var mysql = req.app.get('mysql');
 
         getTrainer(res, mysql, context, req.params.id, complete);
@@ -176,7 +176,7 @@ module.exports = function(){
 
     // called with the jquery ajax is used in update-trainer.js
     // updates name and catchphrase for the trainer id passed, with the info passed
-    router.put('/update/:id', function(req, res){
+    router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE Trainers SET name=?, catchphrase=?, WHERE id=?";
         var inserts = [req.body.name, req.body.catchphrase, req.params.id];
@@ -196,6 +196,21 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM Trainers WHERE id = ?";
         var inserts = [req.params.id];
+        sql = mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.status(400);
+                res.end();
+            }else{
+                res.status(202).end();
+            }
+        })
+    });
+
+    router.delete('/deleteBadge/:bid/:tid', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "DELETE FROM Trainer_Badge INNER JOIN WHERE bid = ? AND tid = ?";
+        var inserts = [req.params.bid, req.params.tid];
         sql = mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
