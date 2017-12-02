@@ -133,6 +133,22 @@ module.exports = function(){
         }
     });
 
+    router.post('/add-badge', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO Trainer_Badge (trainerID, badgeID) VALUES (?,?)";
+        var inserts = [req.params.id, req.body.badge];
+        console.log(req.params.id);
+        console.log(req.body.badge);
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/trainers/add-badge');
+            }
+        });
+    });
+
     // called with the jquery ajax is used in update-trainer.js
     // updates name and catchphrase for the trainer id passed, with the info passed
     router.put('/:id', function(req, res){
