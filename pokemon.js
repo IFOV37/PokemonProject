@@ -108,8 +108,10 @@ module.exports = function(){
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE Pokemon SET name=?, type=?, attack=?, trainerID=? WHERE id=?";
-        var inserts = [req.body.name, req.body.type, req.body.attack, req.body.trainer, req.params.id];
+        var inserts = [req.body.name, req.body.type, req.body.attack, 10, req.params.id];
         console.log(req.body);
+	console.log(req.body.Trainer);
+	console.log(req.params.id);
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
