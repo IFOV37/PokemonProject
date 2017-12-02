@@ -50,6 +50,22 @@ module.exports = function(){
         }
     });
 
+        /* Adds a person, redirects to the people page after adding */
+
+    router.post('/', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO Badges (name, color) VALUES (?,?)";
+        var inserts = [req.body.name, req.body.color];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/badges');
+            }
+        });
+    });
+
     // allows us to pass an id to the badges page so we can navigate to the update-badge page
     // to edit that specific badge's data
     router.get('/:id', function(req, res){

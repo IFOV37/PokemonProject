@@ -54,7 +54,7 @@ module.exports = function(){
 
     function getGym(res, mysql, context, id, complete){
         var sql = "SELECT Gyms.id, Gyms.name, Trainers.name AS 'leader', Badges.name AS 'badge' FROM Gyms INNER JOIN Trainers ON Trainers.id = Gyms.trainerID INNER JOIN Badges ON Badges.id = Gyms.badgeID WHERE Gyms.id = ?";
-        var inserts = [Gyms.id];
+        var inserts = [id];
         mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -74,8 +74,8 @@ module.exports = function(){
         context.jsscripts = ["delete-gym.js"]  // we need to pass our script/function if we want to actually be able to delete a pokemon  review if we want to later
         var mysql = req.app.get('mysql');
 
-        //getBadges(res, mysql, context, complete);
-        //getTrainers(res, mysql, context, complete);
+        getBadges(res, mysql, context, complete);
+        getTrainers(res, mysql, context, complete);
         //getPokemon(res, mysql, context, complete);
         getGyms(res, mysql, context, complete);
 
@@ -85,6 +85,22 @@ module.exports = function(){
                 res.render('gyms', context);
             }
         }
+    });
+
+            /* Adds a person, redirects to the people page after adding */
+
+    router.post('/', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO Gyms (name, trainer, badge) VALUES (?,?,?)";
+        var inserts = [req.body.name, req.body.trainer, req.body.badge];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/badges');
+            }
+        });
     });
 
 

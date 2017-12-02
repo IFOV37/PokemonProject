@@ -28,6 +28,16 @@ table, th, td{
 		{{/each}}
 	</tbody>
 
+    <form id="addGym" action="/gyms" method="post">
+    Name: <input type="text" name="fname"><br>
+    Trainer: <select name="trainer"> 
+        {{#each trainers}}
+        <option value="{{trainers.id}}">{{trainers.name}}</option>
+        {{/each}}
+    </select><br>
+    Age: <input type="number" name="age"><br>
+    <input type="submit" value="Submit">
+    </form>
 	<!-- add form to add a pokemon, if we whish to do so here. -->
 
 </table>
