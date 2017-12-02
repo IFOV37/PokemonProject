@@ -42,7 +42,7 @@ module.exports = function(){
 
     // get all gyms in Gyms table
     function getGyms(res, mysql, context, complete){
-    	mysql.pool.query("SELECT Gyms.id, Gyms.name, t.name AS GymLeader, b.name AS GymBadge FROM Gyms INNER JOIN Trainers t ON t.id = Gyms.trainerID INNER JOIN Badges b ON b.id = Gyms.badgeID", function(error, results, fields){
+    	mysql.pool.query("SELECT g.id, g.name, t.name AS GymLeader, b.name AS GymBadge FROM Gyms g INNER JOIN Trainers t ON t.id = g.trainerID INNER JOIN Badges b ON b.id = g.badgeID", function(error, results, fields){
     		if(error){
     			res.write(JSON.stringify(error));
     			res.end();
@@ -53,7 +53,7 @@ module.exports = function(){
     }
 
     function getGym(res, mysql, context, id, complete){
-        var sql = "SELECT Gyms.id, Gyms.name, Trainers.name AS 'leader', Badges.name AS 'badge' FROM Gyms INNER JOIN Trainers ON Trainers.id = Gyms.trainerID INNER JOIN Badges ON Badges.id = Gyms.badgeID WHERE Gyms.id = ?";
+        var sql = "SELECT g.id, g.name, t.name AS 'leader', b.name AS 'badge' FROM Gyms g INNER JOIN Trainers t ON t.id = g.trainerID INNER JOIN Badges b ON b.id = g.badgeID WHERE g.id = ?";
         var inserts = [id];
         mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
@@ -81,7 +81,7 @@ module.exports = function(){
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 3){
                 res.render('gyms', context);
             }
         }
@@ -123,8 +123,8 @@ module.exports = function(){
         }
     });
 
-    // called with the jquery ajax is used in update-trainer.js
-    // updates name and catchphrase for the trainer id passed, with the info passed
+    // called with the jquery ajax is used in update-gym.js
+    // updates name for the gym id passed, with the info passed
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE Gyms SET name=? WHERE id=?";

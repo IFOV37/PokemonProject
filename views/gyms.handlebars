@@ -11,14 +11,14 @@ table, th, td{
 
 <form id="addGym" action="/gyms" method="post">
     Name: <br><input type="text" name="name"><br><br>
-    Trainer: <br><select name="trainer">
+    Trainer: <br><select name="Trainer">
     {{#each trainers}}
-        <option value="{{trainers.id}}">{{trainers.name}}</option>
+        <option value="{{id}}">{{name}}</option>
     {{/each}}
 </select><br><br>
-    Badge: <br><select name="badge">
+    Badge: <br><select name="Badge">
     {{#each badges}}
-        <option value="{{badges.id}}">{{badges.name}}</option>
+        <option value="{{id}}">{{name}}</option>
     {{/each}}
 </select><br><br>
     <input type="submit" value="Submit">

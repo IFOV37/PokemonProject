@@ -9,6 +9,12 @@
     <br>
 	Catchphrase: <br>
     <input type="text" name="catchphrase" value="{{trainer.catchphrase}}"><br>
+     <br>
+	Badges: <br><select name="Badge"> 
+        {{#each badges}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select>
 </form>
 <br>
 <button onclick="updateTrainer({{trainer.id}})">Update</button>
