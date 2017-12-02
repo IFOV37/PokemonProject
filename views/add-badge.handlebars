@@ -10,7 +10,7 @@ table, th, td{
 <h4 style="color:red">After adding the badges you want, click the Trainers link at the bottom to return to the Trainers page</h4>
 
 <form id="add-badge" action="/trainers/add-badge" method="post">
-	Trainer ID: <input name="trainerID" value={{trainer.id}} disabled><br><br>
+	Trainer ID: <input type="text" name="trainerID" value="{{trainer.id}}" disabled><br><br>
     Add Badge: <br><select name="badge" id="badge-selector"> 
         {{#each badgesNotOwned}}
         <option value="{{id}}">{{name}}</option>
