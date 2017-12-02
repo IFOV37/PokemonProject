@@ -133,7 +133,7 @@ module.exports = function(){
         }
     });
 
-    router.post('/add-badge', function(req, res){
+    router.put('/add-badge/:id', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Trainer_Badge (trainerID, badgeID) VALUES (?,?)";
         var inserts = [req.params.id, req.body.badge];
