@@ -180,6 +180,9 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE Trainers SET name=?, catchphrase=?, WHERE id=?";
         var inserts = [req.body.name, req.body.catchphrase, req.params.id];
+        console.log("put function");
+        console.log(req.body);
+        console.log(req.params.id);
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
