@@ -101,13 +101,13 @@ module.exports = function(){
         context.jsscripts = ["add-badge.js"];
         var mysql = req.app.get('mysql');
 
-        //getTrainer(res, mysql, context, req.params.id, complete);
-        //getTrainersBadges(res, mysql, context, req.params.id, complete);
+        getTrainer(res, mysql, context, req.params.id, complete);
+        getTrainersBadges(res, mysql, context, req.params.id, complete);
         getBadgesNotOwned(res, mysql, context, complete);
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 3){
                 res.render('add-badge', context);
             }
         }
