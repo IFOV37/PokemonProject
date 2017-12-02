@@ -95,7 +95,7 @@ module.exports = function(){
         });
     });
 
-    router.get('/add-badge/:id', function(req, res){
+    router.get('/trainers/add-badge/:id', function(req, res){
         callbackCount = 0;
         var context = {};
         context.jsscripts = ["add-badge.js"];
