@@ -32,7 +32,7 @@ module.exports = function(){
 
     // get all pokemon in pokemon table
     function getTrainersBadges(res, mysql, context, id, complete){
-        var sql = "SELECT b.id, b.name FROM Badges b INNER JOIN Trainer_Badge tb ON b.ID = tb.badgeID WHERE tb.trainerID = ?";
+        var sql = "SELECT b.id, b.name, tb.trainerID FROM Badges b INNER JOIN Trainer_Badge tb ON b.ID = tb.badgeID WHERE tb.trainerID = ?";
         var inserts = [id];
         mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
