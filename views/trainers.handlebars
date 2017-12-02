@@ -12,6 +12,11 @@ table, th, td{
 <form id="addTrainer" action="/trainers" method="post">
     Name: <br><input type="text" name="name"><br><br>
     Catchphrase: <br><input type="text" name="catchphrase"><br><br>
+    <select name="Pokemon" id="Pokemon">
+        {{#each Pokemon}}
+            <option value="{{id}} = NULL">{{name}}</option>
+        {{/each}}
+    </select><br>
     <input type="submit" value="Submit">
 </form>
 <br>
@@ -28,6 +33,7 @@ table, th, td{
 		<tr>
 			<td>{{name}}</td>
 			<td>{{catchphrase}}</td>
+            <td>{{pokemon}}</td>
 			<td><button onclick="deleteTrainer({{id}})">Delete</button></td>
 			<td><a href="/trainers/{{id}}">Update Trainer Info</a></td>
 		</tr>

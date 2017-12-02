@@ -6,7 +6,7 @@ module.exports = function(){
 
     // get all trainers in Trainers table
     function getTrainers(res, mysql, context, complete){
-    	mysql.pool.query("SELECT id, name, catchphrase FROM Trainers", function(error, results, fields){
+    	mysql.pool.query("SELECT id, name, catchphrase, p.name AS pokemon FROM Trainers INNER JOIN Pokemon p ON p.trainerID = Trainers.id", function(error, results, fields){
     		if(error){
     			res.write(JSON.stringify(error));
     			res.end();
