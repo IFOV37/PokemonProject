@@ -30,6 +30,20 @@ module.exports = function(){
         });
     }
 
+    // get all pokemon in pokemon table
+    function getTrainersBadges(res, mysql, context, id, complete){
+        var sql = "SELECT b.id, b.name FROM Trainer_Badge tb INNER JOIN Badge b ON b.ID = tb.badgeID WHERE id = ?";
+        var inserts = [id];
+        mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.tb = results;
+            complete();
+        });
+    }
+
     /*Display all pokemon. Requires web based javascript to delete users with AJAX*/
 
     // displays all trainers in Trainers table
@@ -74,10 +88,11 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
 
         getTrainer(res, mysql, context, req.params.id, complete);
+        getTrainersBadges(res, mysql, context, req.params.id, complete)
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 2){
                 res.render('update-trainer', context);
             }
 

@@ -12,6 +12,24 @@
 </form>
 <br>
 <button onclick="updateTrainer({{trainer.id}})">Update</button>
+<br>
+<br>
+<table>
+	<thead>
+		<th>Badge</th>
+	</thead>
+	<tbody>
+		{{#each tb}}
+		<tr>
+			<td>{{name}}</td>
+		</tr>
+		{{/each}}
+	</tbody>
+
+	<!-- add form to add a pokemon, if we whish to do so here. -->
+
+</table>
+<br>
 <p>To visit the pages with data, here are the links:</p>
 <a href="/pokemon">Pokemon</a>
 <a href="/trainers">Trainers</a>
