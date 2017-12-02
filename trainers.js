@@ -108,7 +108,7 @@ module.exports = function(){
         function complete(){
             callbackCount++;
             if(callbackCount >= 3){
-                res.render('add-badge', context);
+                res.render('trainers/add-badge', context);
             }
         }
     });
