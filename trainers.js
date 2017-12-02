@@ -118,7 +118,7 @@ module.exports = function(){
     router.get('/add-badge/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-        //context.jsscripts = ["update-trainer.js"];
+        context.jsscripts = ["add-badge.js"];
         var mysql = req.app.get('mysql');
 
         //getTrainer(res, mysql, context, req.params.id, complete);
