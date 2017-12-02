@@ -178,7 +178,7 @@ module.exports = function(){
     // updates name and catchphrase for the trainer id passed, with the info passed
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE Trainers SET name=?, catchphrase=?, WHERE id=?";
+        var sql = "UPDATE Trainers SET name=?, catchphrase=? WHERE id=?";
         var inserts = [req.body.name, req.body.catchphrase, req.params.id];
         console.log("put function");
         console.log(req.body);
