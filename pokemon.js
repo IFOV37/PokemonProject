@@ -64,22 +64,6 @@ module.exports = function(){
         }
     });
 
-    /* Adds a pokemon, redirects to the pokemon page after adding */
-/*
-    router.post('/', function(req, res){
-        var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO Pokemon (name, type, attack) VALUES (?,?, ?)";
-        var inserts = [req.body.name, req.body.type, req.body.attack];
-        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
-            if(error){
-                res.write(JSON.stringify(error));
-                res.end();
-            }else{
-                res.redirect('/pokemon');
-            }
-        });
-    });
-*/
 
     // allows us to pass an id to the pokemon page so we can navigate to the update-pokemon page
     // to edit that specific pokemon's data
