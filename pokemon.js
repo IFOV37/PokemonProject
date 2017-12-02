@@ -54,7 +54,7 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
 
         getPokemon(res, mysql, context, complete);
-       // getTrainers(res, mysql, context, complete);
+        getTrainers(res, mysql, context, complete);
 
         function complete(){
             callbackCount++;
