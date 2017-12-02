@@ -1,11 +1,14 @@
 <!-- gym update handlebars form-->
 
 <h1>Update {{gym.name}}:</h1>
+<h3>Note: After updating information, hit the Update button - DO NOT PRESS ENTER</h3>
 <form id="update-gym" action="/gyms" method="post">
-    Name: <input type="text" name="name" value="{{gym.name}}"><br>
+    Name: <br>
+    <input type="text" name="name" value="{{gym.name}}"><br>
     <label for="trainer">Gym Leader: {{gym.leader}}</label><br>
     <label for="trainer">Gym Badge: {{gym.badge}}</label>
 </form>
+<br>
 <button onclick="updateGym({{gym.id}})">Update</button>
 <p>To visit the pages with data, here are the links:</p>
 <a href="/pokemon">Pokemon</a>

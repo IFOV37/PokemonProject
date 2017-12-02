@@ -1,13 +1,20 @@
 <!-- pokemon update handlebars form-->
 
 <h1>Update {{pokemon.name}}:</h1>
+<h3>Note: After updating information, hit the Update button - DO NOT PRESS ENTER</h3>
+
 <form id="update-pokemon" action="/pokemon" method="post">
-    Name: <input type="text" name="name" value="{{pokemon.name}}"><br>
-    Type: <input type="text" name="type" value="{{pokemon.type}}"><br>
-    Attack: <input type="text" name="attack" value="{{pokemon.attack}}"><br>
-     Trainer: <input type="text" name="trainer" value="{{pokemon.trainer}}" disabled><br> 
+    Name: <br>
+    <input type="text" name="name" value="{{pokemon.name}}"><br>
+    Type: <br>
+    <input type="text" name="type" value="{{pokemon.type}}"><br>
+    Attack: <br>
+    <input type="text" name="attack" value="{{pokemon.attack}}"><br>
+     Trainer: <br>
+    <input type="text" name="trainer" value="{{pokemon.trainer}}" disabled><br>
     <label for="trainer">Trainer: {{pokemon.Trainer}}</label>
 </form>
+<br>
 <button onclick="updatePokemon({{pokemon.id}})">Update</button>
 <p>To visit the pages with data, here are the links:</p>
 <a href="/pokemon">Pokemon</a>

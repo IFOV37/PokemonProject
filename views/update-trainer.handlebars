@@ -1,10 +1,15 @@
 <!-- trainer update handlebars form-->
 
 <h1>Update {{trainer.name}}:</h1>
+<h3>Note: After updating information, hit the Update button - DO NOT PRESS ENTER</h3>
+
 <form id="update-trainer" action="/trainers" method="post">
-    Name: <input type="text" name="name" value="{{trainer.name}}"><br>
-    Catchphrase: <input type="text" name="catchphrase" value="{{trainer.catchphrase}}"><br>
+    Name: <br>
+    <input type="text" name="name" value="{{trainer.name}}"><br>
+    Catchphrase: <br>
+    <input type="text" name="catchphrase" value="{{trainer.catchphrase}}"><br>
 </form>
+<br>
 <button onclick="updateTrainer({{trainer.id}})">Update</button>
 <p>To visit the pages with data, here are the links:</p>
 <a href="/pokemon">Pokemon</a>
