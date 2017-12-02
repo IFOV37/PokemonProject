@@ -108,7 +108,7 @@ module.exports = function(){
         function complete(){
             callbackCount++;
             if(callbackCount >= 3){
-                res.render('trainers/add-badge', context);
+                res.render('add-badge', context);
             }
         }
     });
@@ -135,7 +135,7 @@ module.exports = function(){
 
 
 
-    router.post('/add-badge/', function(req, res){
+    router.post('/trainers/add-badge/', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Trainer_Badge (trainerID, badgeID) VALUES (?,?)";
         var inserts = [req.body.trainerID, req.body.badge];
