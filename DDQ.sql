@@ -44,8 +44,8 @@ UNIQUE (`name`)
 CREATE TABLE `Trainer_Badge` (
 `trainerID` int(11) NOT NULL,
 `badgeID` int(11) NOT NULL,
-FOREIGN KEY (`trainerID`) REFERENCES `Trainer` (`id`) ON DELETE CASCADE,
-FOREIGN KEY (`badgeID`) REFERENCES `Badge` (`id`)
+FOREIGN KEY (`trainerID`) REFERENCES `Trainers` (`id`) ON DELETE CASCADE,
+FOREIGN KEY (`badgeID`) REFERENCES `Badges` (`id`)
 )ENGINE=InnoDB;
 
 
