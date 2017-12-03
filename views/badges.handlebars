@@ -25,9 +25,10 @@ table, th, td{
     Color: <br><select name="badgeColor" id="badgeSearch"><br><br>
         {{#each badges}}
             <option value="{{id}}">{{color}}</option>
-        {{/each}}<br><br>
+        <br><br>
         </select>
-    <a href="/badges/search/{{id}}">Search for Badge</a>
+    <a href="/badges/search/{{color}}">Search for Badge</a>
+    {{/each}}
   <!--  <input type="submit" value="Search">
  </form> -->
 </fieldset>
