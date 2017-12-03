@@ -66,8 +66,8 @@ module.exports = function(){
 
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO Trainers (name, catchphrase, pokemon) VALUES (?,?, ?)";
-        var inserts = [req.body.name, req.body.catchphrase, req.body.pokemon];
+        var sql = "INSERT INTO Trainers (name, catchphrase) VALUES (?,?)";
+        var inserts = [req.body.name, req.body.catchphrase];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
