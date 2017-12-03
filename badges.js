@@ -65,7 +65,7 @@ module.exports = function(){
             }
         });
     });
-
+/*
     router.get('/search', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -81,6 +81,7 @@ module.exports = function(){
             }
         }
     });
+    */
 
     router.post('/search', function(req, res){
         var mysql = req.app.get('mysql');
