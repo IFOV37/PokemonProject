@@ -9,7 +9,7 @@ function searchBadgeColor(color){
     })
 };
 
-function searchbadge(url){
+function searchbadge(){
     var colorId = document.getElementById("badgeSearch");
     console.log(colorId);
 
