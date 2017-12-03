@@ -19,7 +19,8 @@ module.exports = function(){
     // get single pokemon by id
     function getSinglePokemon(res, mysql, context, id, complete){
 
-        var sql = "SELECT p.id, p.name, p.type, p.attack, t.name AS 'Trainer' FROM Pokemon p INNER JOIN Trainers t ON t.id = p.trainerID WHERE p.id = ?";
+        //var sql = "SELECT p.id, p.name, p.type, p.attack, t.name AS 'Trainer' FROM Pokemon p LEFT JOIN Trainers t ON t.id = p.trainerID WHERE p.id = ?";
+        var sql = "SELECT id, name, type, attack, trainerID FROM Pokemon WHERE id = ?";
         var inserts = [id];
         mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
@@ -32,8 +33,8 @@ module.exports = function(){
     }
 
     // get all trainers in the trainer table
-    /*function getTrainers(res, mysql, context, complete){
-        mysql.pool.query("SELECT id, name, catchphrase FROM Trainers", function(error, results, fields){
+    function getTrainers(res, mysql, context, complete){
+        mysql.pool.query("SELECT id, name FROM Trainers", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -41,7 +42,7 @@ module.exports = function(){
             context.trainers = results;
             complete();
         });
-    }*/
+    }
 
 
 
@@ -50,11 +51,11 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        context.jsscripts = ["deletepokemon.js"]  // we need to pass our script/function if we want to actually be able to delete a pokemon  review if we want to later
+        context.jsscripts = ["delete-pokemon.js"]  // we need to pass our script/function if we want to actually be able to delete a pokemon  review if we want to later
         var mysql = req.app.get('mysql');
 
         getPokemon(res, mysql, context, complete);
-       // getTrainers(res, mysql, context, complete);
+        //getTrainers(res, mysql, context, complete);
 
         function complete(){
             callbackCount++;
@@ -70,26 +71,45 @@ module.exports = function(){
     router.get('/:id', function(req, res){
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["update-pokemon.js"];
+        context.jsscripts = ["update-pokemon.js", "select-trainer.js"];
         var mysql = req.app.get('mysql');
 
         getSinglePokemon(res, mysql, context, req.params.id, complete);
+        getTrainers(res, mysql, context, complete);
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 2){
+            	console.log(context);
                 res.render('update-pokemon', context);
             }
 
         }
     });
 
+    /* Adds a pokemon, redirects to the pokemon page after adding */
+
+    router.post('/', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO Pokemon (name, type, attack) VALUES (?,?,?)";
+        var inserts = [req.body.name, req.body.type, req.body.attack];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/pokemon');
+            }
+        });
+    });
+
+
     // called with the jquery ajax is used in update-pokemon.js
     // updates name, type, and attack for the pokemon id passed, with the info passed
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE Pokemon SET name=?, type=?, attack=? WHERE id=?";
-        var inserts = [req.body.name, req.body.type, req.body.attack, req.params.id];
+        var sql = "UPDATE Pokemon SET name=?, type=?, attack=?, trainerID=? WHERE id=?";
+        var inserts = [req.body.name, req.body.type, req.body.attack, req.body.trainerID, req.params.id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));

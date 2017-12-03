@@ -37,7 +37,7 @@ module.exports = function(){
     router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        //context.jsscripts = ["deletepokemon.js"]  // we need to pass our script/function if we want to actually be able to delete a pokemon  review if we want to later
+        context.jsscripts = ["delete-badge.js"]  // we need to pass our script/function if we want to actually be able to delete a pokemon  review if we want to later
         var mysql = req.app.get('mysql');
 
         getBadges(res, mysql, context, complete);
@@ -48,6 +48,22 @@ module.exports = function(){
                 res.render('badges', context);
             }
         }
+    });
+
+        /* Adds a badge, redirects to the badge page after adding */
+
+    router.post('/', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "INSERT INTO Badges (name, color) VALUES (?,?)";
+        var inserts = [req.body.name, req.body.color];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/badges');
+            }
+        });
     });
 
     // allows us to pass an id to the badges page so we can navigate to the update-badge page
