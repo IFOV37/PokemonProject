@@ -13,12 +13,12 @@ table, th, td{
     Name: <br><input type="text" name="name"><br><br>
     Trainer: <br><select name="trainer">
     {{#each trainers}}
-        <option value="{{trainers.id}}">{{trainers.name}}</option>
+        <option value="{{id}}">{{name}}</option>
     {{/each}}
 </select><br><br>
     Badge: <br><select name="badge">
     {{#each badges}}
-        <option value="{{badges.id}}">{{badges.name}}</option>
+        <option value="{{id}}">{{name}}</option>
     {{/each}}
 </select><br><br>
     <input type="submit" value="Submit">

@@ -81,7 +81,7 @@ module.exports = function(){
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 3){
                 res.render('gyms', context);
             }
         }
@@ -91,7 +91,7 @@ module.exports = function(){
 
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO Gyms (name, trainer, badge) VALUES (?,?,?)";
+        var sql = "INSERT INTO Gyms (name, trainerID, badgeID) VALUES (?,?,?)";
         var inserts = [req.body.name, req.body.trainer, req.body.badge];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
