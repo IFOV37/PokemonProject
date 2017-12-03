@@ -112,7 +112,8 @@ module.exports = function(){
         }
     });
     */
-    router.get('/search/:color', function(req, res){
+    /*
+    router.get('/search', function(req, res){
         callbackCount = 0;
         var context = {};
         //context.jsscripts = ["update-badge.js"];
@@ -127,7 +128,7 @@ module.exports = function(){
             }
         }
     });
-
+*/
 
     router.post('/search', function(req, res){
         var mysql = req.app.get('mysql');
