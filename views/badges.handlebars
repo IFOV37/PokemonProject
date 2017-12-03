@@ -22,13 +22,14 @@ table, th, td{
 <fieldset>Search Page:
 <!-- <form id="searchBadge" action="/badges/search" method="post"> -->
 <br>
-    <Search:  <br><select name="badgeColor" id="badgeSearch"><br><br>
+    Search:  <br><select name="badgeColor" id="badgeSearch"><br><br>
     {{#each badges}}
-            <option value="{{color}}">{{color}}</option>
-            <a href="/badges/search">Search by Color</a>
+            <option value="{{id}}">{{color}}</option>
+
     {{/each}}
-    
         </select>
+        <button onclick="searchbadge({{url}})" type="button">Search</button>
+        <a href="/badges/search">Search by Color</a>
 
   <!--  <input type="submit" value="Search">
  </form> -->

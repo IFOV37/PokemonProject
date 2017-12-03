@@ -12,6 +12,7 @@ module.exports = function(){
     			res.end();
     		}
             context.badges = results;
+            context.url = "/badges/search";
             complete();
     	});
     }
