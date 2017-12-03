@@ -11,11 +11,23 @@ table, th, td{
 <br>
 <h4 style="color:red">A badge won't allow deletion if it is bound to a trainer.  You must remove the badge from that trainer, then you can delete the badge.</h4>
 
+<fieldset>Add Badge:
 <form id="addBadge" action="/badges" method="post">
     Name: <br><input type="text" name="name"><br><br>
     Color: <br><input type="text" name="color"><br><br>
     <input type="submit" value="Submit">
 </form>
+</fieldset>
+<fieldset>Search for badge color:
+<form id="searchBadge" action="/badges/search" method="post">
+    Color: <br><select name="badgeSearch" id="badgeSearch"><br><br>
+        {{#each badges}}
+            <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    <input type="submit" value="Search">
+</form>
+</fieldset>
+
 <br>
 
 <table>

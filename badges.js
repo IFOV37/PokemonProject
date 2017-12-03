@@ -66,6 +66,20 @@ module.exports = function(){
         });
     });
 
+    router.post('/search', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "SELECT name, color FROM Badges WHERE name LIKE %?%";
+        var inserts = [req.body.color];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.redirect('/badges');
+            }
+        });
+    });
+
     // allows us to pass an id to the badges page so we can navigate to the update-badge page
     // to edit that specific badge's data
     router.get('/:id', function(req, res){
