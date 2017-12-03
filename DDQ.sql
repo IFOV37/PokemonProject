@@ -26,8 +26,8 @@ CREATE TABLE `Gyms` (
 `trainerID` int(11),
 `badgeID` int(11),
 PRIMARY KEY (`id`),
-FOREIGN KEY (`trainerID`) REFERENCES `Trainer` (`id`),
-FOREIGN KEY (`badgeID`) REFERENCES `Badge` (`id`),
+FOREIGN KEY (`trainerID`) REFERENCES `Trainers` (`id`),
+FOREIGN KEY (`badgeID`) REFERENCES `Badges` (`id`),
 UNIQUE (`name`)
 )ENGINE=InnoDB;
 
