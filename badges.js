@@ -63,6 +63,22 @@ module.exports = function(){
         }
     });
 
+    router.get('/search', function(req, res){
+        var callbackCount = 0;
+        var context = {};
+        context.jsscripts = ["search-badge.js"]  // we need to pass our script/function if we want to actually be able to delete a pokemon  review if we want to later
+        var mysql = req.app.get('mysql');
+
+        getBadges(res, mysql, context, complete);
+
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('badges', context);
+            }
+        }
+    });
+
         /* Adds a badge, redirects to the badge page after adding */
 
     router.post('/', function(req, res){
