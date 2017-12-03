@@ -18,12 +18,13 @@ table, th, td{
     <input type="submit" value="Submit">
 </form>
 </fieldset>
+<br>
 <fieldset>Search for badge color:
 <form id="searchBadge" action="/badges/search" method="post">
     Color: <br><select name="badgeSearch" id="badgeSearch"><br><br>
         {{#each badges}}
-            <option value="{{id}}">{{name}}</option>
-        {{/each}}
+            <option value="{{id}}">{{color}}</option>
+        {{/each}}<br><br>
     <input type="submit" value="Search">
 </form>
 </fieldset>

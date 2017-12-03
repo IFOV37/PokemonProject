@@ -66,16 +66,33 @@ module.exports = function(){
         });
     });
 
+    router.get('/search', function(req, res){
+        var callbackCount = 0;
+        var context = {};
+        //context.jsscripts = ["delete-badge.js"]  // we need to pass our script/function if we want to actually be able to delete a pokemon  review if we want to later
+        var mysql = req.app.get('mysql');
+
+        //getBadge(res, mysql, context, complete);
+
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('badges', context);
+            }
+        }
+    });
+
     router.post('/search', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "SELECT name, color FROM Badges WHERE name LIKE %?%";
+        var sql = "SELECT name, color FROM Badges WHERE color LIKE %?%";
         var inserts = [req.body.color];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }else{
-                res.redirect('/badges');
+                //res.redirect('/badges/search');
+                res.render('/badges', results);
             }
         });
     });
