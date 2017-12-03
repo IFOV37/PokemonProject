@@ -87,6 +87,7 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         var sql = "SELECT name, color FROM Badges WHERE color = ?";
         var inserts = [req.body.color];
+        console.log(req.body);
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
