@@ -13,7 +13,7 @@ function searchbadge(){
     var colorId = document.getElementById("badgeSearch");
     console.log(colorId);
 
-    var color = colorId.options[colorId.selectedIndex].text;
+    var color = colorId.options[colorId.selectedIndex].value;
     console.log(colorId);
 
 
