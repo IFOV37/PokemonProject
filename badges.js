@@ -70,7 +70,7 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
 
         getBadges(res, mysql, context, complete);
-        //getBadgesFound()
+        getBadgeColor(res, mysql, context, color, complete)
 
         function complete(){
             callbackCount++;
@@ -128,7 +128,7 @@ module.exports = function(){
         }
     });
 
-/*
+
     router.post('/search', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "SELECT name, color FROM Badges WHERE id = ?";
@@ -146,7 +146,22 @@ module.exports = function(){
         });
     });
 
-    */
+    router.put('/search/:id', function(req, res){
+        var mysql = req.app.get('mysql');
+        var sql = "UPDATE Badges SET name=?, color=? WHERE id=?";
+        var inserts = [req.body.name, req.body.color, req.params.id];
+        sql = mysql.pool.query(sql,inserts,function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }else{
+                res.status(200);
+                res.end();
+            }
+        });
+    });
+
+
 
     // allows us to pass an id to the badges page so we can navigate to the update-badge page
     // to edit that specific badge's data
