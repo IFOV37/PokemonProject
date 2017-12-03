@@ -60,6 +60,18 @@ module.exports = function(){
         });
     }
 
+        // get all pokemon in pokemon table
+    function getPokemon(res, mysql, context, complete){
+        mysql.pool.query("SELECT p.id, p.name FROM Pokemon p LEFT JOIN Trainers t ON t.id = p.trainerID WHERE p.trainerID IS NULL", function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.pokemon = results;
+            complete();
+        });
+    }
+
     /*Display all pokemon. Requires web based javascript to delete users with AJAX*/
 
     // displays all trainers in Trainers table
@@ -70,10 +82,11 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
 
         getTrainers(res, mysql, context, complete);
+        getPokemon(res, mysql, context, complete);
 
         function complete(){
             callbackCount++;
-            if(callbackCount >= 1){
+            if(callbackCount >= 2){
                 res.render('trainers', context);
             }
         }
