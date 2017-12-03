@@ -98,6 +98,7 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Trainers (name, catchphrase) VALUES (?,?)";
         var inserts = [req.body.name, req.body.catchphrase];
+        console.log(req.body);
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
