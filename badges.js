@@ -85,7 +85,7 @@ module.exports = function(){
 
     router.post('/search', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "SELECT name, color FROM Badges WHERE color LIKE %?%";
+        var sql = "SELECT name, color FROM Badges WHERE color = ?";
         var inserts = [req.body.color];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
