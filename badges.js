@@ -100,7 +100,7 @@ module.exports = function(){
         var context = {};
         //context.jsscripts = ["update-badge.js"];
         var mysql = req.app.get('mysql');
-
+        console.log(req.params);
         getBadgeColor(res, mysql, context, req.params.color, complete);
 
         function complete(){
