@@ -95,23 +95,23 @@ module.exports = function(){
             }
         });
     });
-/*
-    router.get('/search', function(req, res){
+
+    router.get('/search/:color',function(req, res){
         var callbackCount = 0;
         var context = {};
         //context.jsscripts = ["delete-badge.js"]  // we need to pass our script/function if we want to actually be able to delete a pokemon  review if we want to later
         var mysql = req.app.get('mysql');
 
-        //getBadge(res, mysql, context, complete);
+        getBadgeColor(res, mysql, context, color, complete);
 
         function complete(){
             callbackCount++;
             if(callbackCount >= 1){
-                res.render('badges', context);
+                res.render('badge-search', context);
             }
         }
     });
-    */
+    
     /*
     router.get('/search', function(req, res){
         callbackCount = 0;
