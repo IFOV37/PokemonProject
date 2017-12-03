@@ -1,0 +1,50 @@
+<!-- trainer update handlebars form-->
+<style>
+table, th, td{
+	border: 1px solid black;
+}
+</style>
+
+<h1>Add Badge to {{trainer.name}}:</h1>
+<h4>Note: After updating information, hit the Update button - DO NOT PRESS ENTER</h4>
+<h4 style="color:red">After adding the badges you want, click the Trainers link at the bottom to return to the Trainers page</h4>
+
+<form id="add-badge" action="/trainers/add-badge" method="post">
+	<input type="hidden" name="trainerID" value="{{trainer.id}}"><br><br>
+    Add Badge: <br><select name="badge" id="badge-selector"> 
+        {{#each badgesNotOwned}}
+        <option value="{{id}}">{{name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit" value="Submit">
+</form>
+<br>
+<!-- <button onclick="addBadge({{trainer.id}})">Add</button> -->
+<br>
+<br>
+<table>
+	<thead>
+		<th>Badges Owned</th>
+		<th>Delete Badge</th>
+	</thead>
+	<tbody>
+		{{#each badgesOwned}}
+		<tr>
+			<td>{{name}}</td>
+			<td><button onclick="deleteBadge({{id}}, {{trainerID}})">Delete</button></td>
+		</tr>
+		{{/each}}
+	</tbody>
+
+	<!-- add form to add a pokemon, if we whish to do so here. -->
+
+</table>
+
+<br>
+<p>To visit the pages with data, here are the links:</p>
+<a href="/home">Home</a>
+<a href="/pokemon">Pokemon</a>
+<a href="/trainers">Trainers</a>
+<a href="/badges">Badges</a>
+<a href="/gyms">Gyms</a>
+<a href="/trainers-badges">Trainers-Badges</a>
