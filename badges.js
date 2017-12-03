@@ -62,7 +62,7 @@ module.exports = function(){
             }
         }
     });
-
+/*
     router.get('/search', function(req, res){
         var callbackCount = 0;
         var context = {};
@@ -79,7 +79,7 @@ module.exports = function(){
             }
         }
     });
-
+*/
         /* Adds a badge, redirects to the badge page after adding */
 
     router.post('/', function(req, res){
