@@ -20,13 +20,14 @@ table, th, td{
 </fieldset>
 <br>
 <fieldset>Search for badge color:
-<form id="searchBadge" action="/badges/search" method="post">
+<!-- <form id="searchBadge" action="/badges/search" method="post"> -->
     Color: <br><select name="badgeColor" id="badgeSearch"><br><br>
         {{#each badges}}
             <option value="{{id}}">{{color}}</option>
         {{/each}}<br><br>
-    <input type="submit" value="Search">
-</form>
+    <a href="/badges/search/{{color}}">Search for Badge</a>
+  <!--  <input type="submit" value="Search">
+ </form> -->
 </fieldset>
 
 <br>

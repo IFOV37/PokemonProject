@@ -30,6 +30,19 @@ module.exports = function(){
     	});
     }
 
+    function getBadgeColor(res, mysql, context, color, complete){
+        var sql = "SELECT id, name, color FROM Badges WHERE color LIKE ?";
+        var inserts = [color];
+        mysql.pool.query(sql, inserts, function(error, results, fields){
+            if(error){
+                res.write(JSON.stringify(error));
+                res.end();
+            }
+            context.badges = results;
+            complete();
+        });
+    }
+
 
     /*Display all pokemon. Requires web based javascript to delete users with AJAX*/
 
@@ -82,7 +95,23 @@ module.exports = function(){
         }
     });
     */
+    router.get('/search/:color', function(req, res){
+        callbackCount = 0;
+        var context = {};
+        //context.jsscripts = ["update-badge.js"];
+        var mysql = req.app.get('mysql');
 
+        getBadgeColor(res, mysql, context, req.params.color, complete);
+
+        function complete(){
+            callbackCount++;
+            if(callbackCount >= 1){
+                res.render('badge-search', context);
+            }
+        }
+    });
+
+/*
     router.post('/search', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "SELECT name, color FROM Badges WHERE id = ?";
@@ -99,6 +128,8 @@ module.exports = function(){
             }
         });
     });
+
+    */
 
     // allows us to pass an id to the badges page so we can navigate to the update-badge page
     // to edit that specific badge's data
