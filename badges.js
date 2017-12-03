@@ -93,6 +93,7 @@ module.exports = function(){
                 res.end();
             }else{
                 //res.redirect('/badges/search');
+                console.log(results);
                 res.render('/badges', results);
             }
         });
