@@ -1,18 +1,33 @@
 <!-- badge search handlebars -->
 
-    <table>
+
+<form id="badge" action="/badge/search" method="post">
+    Badge: <br><select name="badge">
+    {{#each badges}}
+        <option value="{{id}}">{{name}}</option>
+    {{/each}}
+</select><br><br>
+    <input type="submit" value="Search">
+</form>
+<br>
+
+
+
+<table>
     <thead>
         <th>Name</th>
         <th>Color</th>
     </thead>
     <tbody>
-        {{#each badges}}
+        {{#each badgesFound}}
         <tr>
             <td>{{name}}</td>
             <td>{{color}}</td>
         </tr>
         {{/each}}
     </tbody>
+</table>
+<br>
 <br>
 <p>To visit the pages with data, here are the links:</p>
 <a href="/home">Home</a>

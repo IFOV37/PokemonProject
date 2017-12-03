@@ -70,6 +70,7 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
 
         getBadges(res, mysql, context, complete);
+        getBadgesFound()
 
         function complete(){
             callbackCount++;
