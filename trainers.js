@@ -159,17 +159,12 @@ module.exports = function(){
         //req.body.trainerID = parseInt(req.body.trainerID, 2);
         //req.body.trainerID = parseInt(req.body.badge, 2);
         var inserts = [req.body.trainerID, req.body.badge];
-        console.log(req.body);
-        console.log(req.body.trainerID);
-        console.log(req.body.badge);
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }else{
                 res.redirect('/trainers');
-                //res.status(200);
-                //res.end();
             }
         });
     });
@@ -180,9 +175,6 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         var sql = "UPDATE Trainers SET name=?, catchphrase=? WHERE id=?";
         var inserts = [req.body.name, req.body.catchphrase, req.params.id];
-        console.log("put function");
-        console.log(req.body);
-        console.log(req.params.id);
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -213,8 +205,6 @@ module.exports = function(){
     router.delete('/deleteBadge/:bid/:tid', function(req, res){
         var mysql = req.app.get('mysql');
         var sql = "DELETE FROM Trainer_Badge WHERE badgeID = ? AND trainerID = ?";
-        console.log(req.params.bid);
-        console.log(req.params.tid);
         var inserts = [req.params.bid, req.params.tid];
         sql = mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
